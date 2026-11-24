@@ -28,9 +28,9 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run build
-      # Single-page app: GitHub Pages serves 404.html for unknown paths, so deep links
-      # such as /projects/shelfscan load the app, which then routes client-side.
-      - run: cp dist/index.html dist/404.html
+      # A copy of index.html at every route (200 for /projects/shelfscan etc.), plus
+      # 404.html as the fallback for unknown paths; the app routes client-side.
+      - run: node scripts/route-pages.mjs
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
