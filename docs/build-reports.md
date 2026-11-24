@@ -782,3 +782,67 @@ No profile photograph, project image, illustration, or decorative asset was adde
 4. Confirm the ten removed skills should remain off the public site, including `Docker & CI/CD` and `Data visualization`.
 5. Confirm the contact/resume publication details are still approved for public display.
 6. Review the rendered color changes when a visual pass is possible; this environment could verify computed contrast but not inspect a screenshot.
+
+---
+
+<a id="m4"></a>
+
+# Milestone 4 Report — Personal projects, QA and deploy
+
+Scope: add the finished personal projects, correct the ShelfScan case study, polish metadata, and publish the site. Workplan phases: 3 (case studies), 4 (QA and polish), 5 (deploy). Date: 2026-11-24.
+
+## 1. What was built
+
+- **Four new case studies** (Production RAG, Image Similarity Search, Garment Attributes, Glove Detection) with measured results and links to code, live demos and videos. Every figure matches the project's public README.
+- **ShelfScan rewritten.** The old text described training detectors and a model comparison that never happened; it now describes the real system (pretrained DETR + DINOv2 grouping) and its measured evaluation.
+- **Professional entries unchanged** (CervicalAI, Robotic Microscopy), as the owner decided.
+- Cards show approved screenshots; featured grid of four (Production RAG, ShelfScan, CervicalAI, Robotic Microscopy).
+- Skills extended with items backed by the public repos; About toolkit line aligned.
+- Social preview image (`public/og-image.png`, 1200×630), canonical URL, `og:image`, per-page browser titles.
+- **Deployed to GitHub Pages** at https://hasta-8.github.io/ (owner's choice over Cloudflare Pages): `.github/workflows/deploy.yml` runs typecheck, lint and build on every push to `main`; `scripts/route-pages.mjs` writes an `index.html` per route so every page answers 200.
+- `README.md` is now a short public page; these reports moved to `docs/build-reports.md`.
+
+## 2. Files changed
+
+- **Created:** `src/data/case-studies/{production-rag,imgsimisearch,garment,glove}.ts`, `public/images/{production-rag,shelfscan,garment,glove}/*.jpg` (6 images), `public/og-image.png`, `.github/workflows/deploy.yml`, `scripts/route-pages.mjs`, new `README.md`.
+- **Modified:** `src/data/projects.ts`, `src/data/case-studies/{index,shelfscan}.ts`, `src/data/skills.ts`, `src/pages/{About,Projects}.tsx`, `src/components/home/FeaturedProjects.tsx`, `src/components/projects/{ProjectVisual,StageFlow}.tsx`, `src/components/layout/ScrollToTop.tsx`, `index.html`, `AGENTS.md`.
+- **Moved:** `README.md` → `docs/build-reports.md`, `task.md` → `docs/phase-2-tasks.md`.
+- **Unchanged:** professional case studies, experience, education, profile, contact, resume, design system, workplan PDF (md5 `253d566663f1bc26d9cc501dd7c71f43`).
+
+## 3. Content-integrity decisions
+
+- Personal-project numbers are copied from each project's README; weaknesses are stated next to them (ShelfScan grouping F1 0.32, Glove bare-hand recall 0.51 on unseen scenes).
+- Screenshots that contain Wikimedia Commons photos credit the photographer and licence in the evidence caption.
+- Image Similarity Search has no public demo or video, so it links to the repository only.
+- The professional cards still show "Case study draft"; flipping them to "reviewed" is the owner's call (`status` in `src/data/projects.ts`).
+
+## 4. Validation evidence
+
+| Check | Command | Result |
+|---|---|---|
+| Types | `npm run typecheck` | clean |
+| Lint | `npm run lint` | 0 warnings, 0 errors |
+| Build | `npm run build` | JS 376.92 kB (114.46 kB gzip), CSS 28.81 kB (6.01 kB gzip) |
+| Layout, local preview | Playwright: 14 routes × 6 widths (1920–390) | 0 problems: no horizontal overflow, one `h1` per page, no console errors, no broken images |
+| Deploy | GitHub Actions `deploy.yml` | success |
+| Live status codes | `curl` | `/`, `/projects/`, `/projects/shelfscan`, `/about` → 200; `/nope` → 404 |
+| Layout, live site | same Playwright audit on https://hasta-8.github.io | 0 problems |
+| Project demos under the same domain | `curl` | `/ShelfScan/`, `/Garment_Detection_Project/`, `/glove-detection-yolov8/` → 200 |
+| Workplan PDF | `md5sum` | `253d566663f1bc26d9cc501dd7c71f43` (unchanged) |
+
+## 5. Where to make changes
+
+| Goal | File |
+|---|---|
+| Add or edit a project, its metrics or links | `src/data/projects.ts` |
+| Case-study text | `src/data/case-studies/<slug>.ts` |
+| Featured projects on the home page | `featuredSlugs` in `src/data/projects.ts` |
+| Project screenshot | `public/images/<slug>/`, then `image` in `projects.ts` |
+| Page titles | `src/components/layout/ScrollToTop.tsx` |
+| Deployment | `.github/workflows/deploy.yml`, `scripts/route-pages.mjs` |
+
+## 6. Content and assets still needed (owner inputs)
+
+- Whether to mark CervicalAI and Robotic Microscopy as reviewed (removes the "Case study draft" label).
+- YouTube links for the Garment and Glove walkthroughs (currently on GitHub releases).
+- Optional: a custom domain.
