@@ -39,6 +39,7 @@ export interface Project {
   caseStudy?: ProjectCaseStudy
 }
 
+// Internal checklist only (see AGENTS.md); not shown on the site.
 export type VerificationStatus = 'verified' | 'pending' | 'not_disclosed'
 
 export interface ArchitectureStage {

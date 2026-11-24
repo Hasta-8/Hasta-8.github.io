@@ -9,7 +9,6 @@ import StageFlow from '../components/projects/StageFlow'
 import ToolList from '../components/projects/ToolList'
 import Container from '../components/ui/Container'
 import Section from '../components/ui/Section'
-import StatusBadge from '../components/ui/StatusBadge'
 import { getProjectBySlug, getRelatedProjects } from '../data/projects'
 
 export default function ProjectDetail() {
@@ -132,10 +131,7 @@ export default function ProjectDetail() {
               description="What the system was measured against, and how the measurement was produced."
             >
               <div className="surface-card p-6 sm:p-7">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <h3 className="text-lg">{caseStudy.dataset.name}</h3>
-                  <StatusBadge status={caseStudy.dataset.status} />
-                </div>
+                <h3 className="text-lg">{caseStudy.dataset.name}</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-muted">
                   {caseStudy.dataset.description}
                 </p>
@@ -159,15 +155,9 @@ export default function ProjectDetail() {
               id="results"
               eyebrow="05 — Results"
               title="Measured results and their qualifications"
-              description="Every reported figure carries the condition it was measured under, and every figure that is still being verified is marked instead of being estimated."
+              description="Each figure with the conditions it was measured under."
             >
               <MetricTable metrics={project.metrics} caption={`Measured results for ${project.title}`} />
-
-              <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted">
-                A figure is only useful together with its qualification. The rows above separate what
-                was measured and documented from what is still pending verification, so the distinction
-                survives a quick read of this page.
-              </p>
             </Section>
 
             <Section

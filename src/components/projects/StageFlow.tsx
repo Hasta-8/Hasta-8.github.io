@@ -1,5 +1,4 @@
 import type { ArchitectureStage } from '../../types'
-import StatusBadge from '../ui/StatusBadge'
 
 interface StageFlowProps {
   stages: ArchitectureStage[]
@@ -15,12 +14,9 @@ export default function StageFlow({ stages }: StageFlowProps) {
             stages.length % 2 === 1 && index === stages.length - 1 ? 'sm:col-span-2' : ''
           }`}
         >
-          <div className="flex items-center justify-between gap-4">
-            <span className="font-mono text-xs tracking-[0.16em] text-ink-subtle">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <StatusBadge status={stage.status} />
-          </div>
+          <span className="font-mono text-xs tracking-[0.16em] text-ink-subtle">
+            {String(index + 1).padStart(2, '0')}
+          </span>
           <h3 className="mt-4 text-base">{stage.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-ink-muted">{stage.description}</p>
         </li>
