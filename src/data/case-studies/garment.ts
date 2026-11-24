@@ -28,6 +28,14 @@ export const garmentCaseStudy: ProjectCaseStudy = {
     { title: 'Zero-shot scoring', description: 'Cosine similarity against prompts encoded at startup; softmax per attribute.', status: 'verified' },
     { title: 'Response', description: 'Label, score and top-3 alternatives per attribute, plus a template-built title.', status: 'verified' },
   ],
+  diagrams: [
+    {
+      src: '/images/garment/architecture.svg',
+      alt: 'Flowchart: garment photo, upload checks, Fashion-CLIP image embedding compared by cosine similarity with prompt embeddings encoded once at startup, per-attribute softmax to label, score and top 3, then a templated title and description',
+      caption: 'Zero-shot attribute pipeline: one image pass per request; the prompts are encoded once.',
+      width: 1285,
+    },
+  ],
   tools: [
     { name: 'Fashion-CLIP (Transformers, PyTorch)', role: 'Zero-shot attribute scoring, CPU-only', status: 'verified' },
     { name: 'FastAPI + Pydantic', role: 'Typed API and validation', status: 'verified' },

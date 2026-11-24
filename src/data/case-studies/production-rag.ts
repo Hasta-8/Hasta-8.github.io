@@ -30,6 +30,14 @@ export const productionRagCaseStudy: ProjectCaseStudy = {
     { title: 'Grounded generation', description: 'Qwen3-1.7B on CPU with a 0.6B fallback; three chunks; every sentence cited.', status: 'verified' },
     { title: 'Answer checks', description: 'Citation validity, entity-name consistency, PII and prompt-leak checks.', status: 'verified' },
   ],
+  diagrams: [
+    {
+      src: '/images/production-rag/architecture.svg',
+      alt: 'Flowchart: question, security screen, answer cache, hybrid retrieval, cross-encoder rerank, grading with up to two query rewrites or a decline, Qwen3-1.7B answer, answer checks, then answer with sources and trace',
+      caption: 'Request path. Orange boxes are checks that can stop or short-circuit a request.',
+      width: 613,
+    },
+  ],
   tools: [
     { name: 'LangGraph', role: 'Agent state machine with bounded retries', status: 'verified' },
     { name: 'llama.cpp (Qwen3-1.7B)', role: 'Local LLM on CPU', status: 'verified' },

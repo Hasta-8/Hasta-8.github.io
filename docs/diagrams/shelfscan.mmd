@@ -1,0 +1,9 @@
+flowchart LR
+    I[Shelf photo] --> V[Upload checks]:::check
+    V -- invalid --> E[Error,<br/>one shape]
+    V --> D[DETR ResNet-50<br/>SKU-110K, conf ≥ 0.8<br/>then NMS]
+    D --> X[Crop each box<br/>DINOv2-small<br/>embedding]
+    X --> G[Agglomerative<br/>clustering, cosine<br/>similarity ≥ 0.6]
+    G --> O[Boxes, groups,<br/>timings and<br/>annotated image]
+    G -. explain mode .-> N[Nearest crops<br/>with similarities]
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

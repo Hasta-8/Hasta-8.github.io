@@ -880,3 +880,13 @@ instead: professional work at MiMD Lab, IIT Delhi, with code and data kept insid
 with `pending: true` renders as "· coming soon" and is not clickable. Image Similarity Search uses one for its
 walkthrough video (placeholder `https://youtu.be/VIDEO_PENDING`; tracked in that project's report). Layout audit:
 0 problems.
+
+## Follow-up: architecture diagrams (2026-11-24)
+
+Each personal project's case study now shows its architecture diagram above the stage cards (`ArchitectureDiagrams.tsx`;
+`diagrams` field in the case-study data). Production RAG and ImgSimiSearch reuse their README Mermaid diagrams
+(ImgSimiSearch has two: search path and index release lifecycle); ShelfScan, Garment and Glove are drawn from their
+README "How it works" text. Sources are in `docs/diagrams/*.mmd`; they were rendered once to static SVG (Mermaid
+11.4.1 in headless Chrome, `docs/diagrams/render.reference.js`) with the site's colours, so the site gains no
+dependency. Orange boxes are checks. Wide diagrams keep at least 70 % of their natural width and scroll sideways
+inside their frame on phones. Layout audit: 0 problems.

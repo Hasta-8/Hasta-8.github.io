@@ -29,6 +29,20 @@ export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
     { title: 'Versioned index', description: 'Immutable releases, atomic activation and rollback, startup validation.', status: 'verified' },
     { title: 'React UI', description: 'Results grid with cached thumbnails linking to full images.', status: 'verified' },
   ],
+  diagrams: [
+    {
+      src: '/images/imgsimisearch/architecture-search.svg',
+      alt: 'Flowchart: the React UI posts an uploaded photo to FastAPI, CLIP encodes it, FAISS finds the top 5 by cosine and maps IDs to image paths, and the results grid shows thumbnails',
+      caption: 'Search path.',
+      width: 1368,
+    },
+    {
+      src: '/images/imgsimisearch/architecture-release.svg',
+      alt: 'Flowchart: image dataset, rebuild_index.py embeds all images, candidate index with metadata and manifest, validation, promotion to an immutable release, ACTIVE.json atomic swap, API re-validates at startup; rollback points back to an earlier release',
+      caption: 'Index release lifecycle: indexes are built, validated and activated like software releases, with rollback.',
+      width: 1362,
+    },
+  ],
   tools: [
     { name: 'CLIP (Transformers, PyTorch)', role: 'Image embeddings', status: 'verified' },
     { name: 'FAISS', role: 'Vector index', status: 'verified' },

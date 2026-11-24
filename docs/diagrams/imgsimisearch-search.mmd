@@ -1,0 +1,6 @@
+flowchart LR
+    R[React UI<br/>user uploads a photo] -->|POST /search-image| A[FastAPI<br/>upload limits]:::check
+    A --> C[CLIP image encoder<br/>512-d, L2-normalised]
+    C --> F[FAISS exact search<br/>top 5 by cosine<br/>IDs → image paths]
+    F -->|scores and URLs| G[Results grid<br/>thumbnails → full image]
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

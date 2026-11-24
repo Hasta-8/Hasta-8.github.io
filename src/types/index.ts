@@ -73,6 +73,15 @@ export interface EvidenceItem {
   status: 'approved' | 'placeholder'
 }
 
+export interface ArchitectureDiagram {
+  /** SVG under public/images/<slug>/, rendered from docs/diagrams/*.mmd */
+  src: string
+  alt: string
+  caption: string
+  /** Natural width of the SVG in px (its viewBox), used to keep text readable. */
+  width: number
+}
+
 export interface ProjectCaseStudy {
   context: string
   problem: string
@@ -80,6 +89,7 @@ export interface ProjectCaseStudy {
   contributions: string[]
   approach: string[]
   architecture: ArchitectureStage[]
+  diagrams?: ArchitectureDiagram[]
   tools: ToolItem[]
   dataset: DatasetInfo
   evaluation: string[]

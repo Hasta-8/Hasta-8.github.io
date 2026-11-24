@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
+import ArchitectureDiagrams from '../components/projects/ArchitectureDiagrams'
 import CaseStudyHeader from '../components/projects/CaseStudyHeader'
 import EvidenceGrid from '../components/projects/EvidenceGrid'
 import MetricTable from '../components/projects/MetricTable'
@@ -105,6 +106,11 @@ export default function ProjectDetail() {
               </ol>
 
               <h3 className="mt-14 text-lg">Architecture</h3>
+              {caseStudy.diagrams && caseStudy.diagrams.length > 0 ? (
+                <div className="mt-6">
+                  <ArchitectureDiagrams diagrams={caseStudy.diagrams} />
+                </div>
+              ) : null}
               <div className="mt-6">
                 <StageFlow stages={caseStudy.architecture} />
               </div>

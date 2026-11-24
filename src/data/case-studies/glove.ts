@@ -27,6 +27,14 @@ export const gloveCaseStudy: ProjectCaseStudy = {
     { title: 'YOLOv8s detector', description: 'Letterboxed to 640×640; two classes; confidence 0.25.', status: 'verified' },
     { title: 'Output', description: 'Annotated image (green gloved, red bare) and JSON with labels, confidences and boxes.', status: 'verified' },
   ],
+  diagrams: [
+    {
+      src: '/images/glove/architecture.svg',
+      alt: 'Flowchart: training on Colab fine-tunes YOLOv8s on a PPE glove dataset; the weights are published on a GitHub release with a SHA-256 check; at run time an image passes upload checks, YOLOv8s detects gloved and bare hands, boxes above confidence 0.25 become an annotated image and JSON',
+      caption: 'Training and inference.',
+      width: 1261,
+    },
+  ],
   tools: [
     { name: 'Ultralytics YOLOv8', role: 'Training and inference', status: 'verified' },
     { name: 'OpenCV, NumPy', role: 'Image handling, perceptual hashing', status: 'verified' },

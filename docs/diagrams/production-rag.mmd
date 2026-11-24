@@ -1,0 +1,14 @@
+flowchart TB
+    Q[Question] --> S[Security screen<br/>injection, PII, delimiters]:::check
+    S -- blocked --> X[400, no<br/>model call]
+    S --> C[Answer cache<br/>versioned keys]:::check
+    C -- hit --> A
+    C --> R[Hybrid retrieval<br/>BM25 + bge-small, RRF]
+    R --> RR[Cross-encoder<br/>rerank]
+    RR --> G[Grade: rerank<br/>score ≥ 2.0?]:::check
+    G -- weak --> W[Rewrite query<br/>≤ 2 steps] --> R
+    G -- budget spent --> D[Decline with<br/>the score]
+    G -- relevant --> L[Qwen3-1.7B<br/>3 chunks, cited answer]
+    L --> K[Checks: citations, entity<br/>names, PII, prompt leak]:::check
+    K --> A[Answer, sources<br/>and trace]
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

@@ -53,6 +53,14 @@ export const shelfScanCaseStudy: ProjectCaseStudy = {
       status: 'verified',
     },
   ],
+  diagrams: [
+    {
+      src: '/images/shelfscan/architecture.svg',
+      alt: 'Flowchart: shelf photo, upload checks, DETR detection with confidence threshold and NMS, DINOv2 crop embeddings, agglomerative clustering, then boxes, groups and annotated image; an optional explain mode returns nearest crops',
+      caption: 'Detection and grouping pipeline.',
+      width: 1326,
+    },
+  ],
   tools: [
     { name: 'PyTorch + Transformers', role: 'DETR detector and DINOv2 embedder, CPU-only', status: 'verified' },
     { name: 'scikit-learn', role: 'Agglomerative clustering', status: 'verified' },

@@ -1,0 +1,9 @@
+flowchart LR
+    D[Image<br/>dataset] --> B[rebuild_index.py<br/>embed all images]
+    B --> K[Candidate index,<br/>metadata, manifest]
+    K --> V[Validate]:::check
+    V -->|promote| S[Immutable<br/>release]
+    S --> P[ACTIVE.json<br/>atomic swap]
+    P --> A[API re-validates<br/>at startup]:::check
+    P -. rollback .-> S
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

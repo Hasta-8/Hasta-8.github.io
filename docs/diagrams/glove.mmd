@@ -1,0 +1,11 @@
+flowchart LR
+    subgraph Training [Training on Colab]
+      R[PPE dataset<br/>glove / no-glove] --> F[Fine-tune YOLOv8s<br/>50 epochs, 640 px]
+    end
+    F --> W[Weights on a<br/>GitHub release<br/>SHA-256 checked]
+    I[Image] --> V[Upload<br/>checks]:::check
+    V --> Y[YOLOv8s<br/>gloved_hand,<br/>bare_hand]
+    W --> Y
+    Y --> B[Boxes with<br/>confidence ≥ 0.25]
+    B --> O[Annotated image<br/>and JSON]
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

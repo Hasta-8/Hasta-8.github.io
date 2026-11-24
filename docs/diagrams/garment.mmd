@@ -1,0 +1,9 @@
+flowchart LR
+    P[Garment<br/>photo] --> V[Upload<br/>checks]:::check
+    V --> E[Fashion-CLIP<br/>image embedding]
+    S[Candidate prompts<br/>categories, colours,<br/>patterns, sleeves,<br/>sections] -->|encoded once<br/>at startup| T[Prompt<br/>embeddings]
+    E --> M[Cosine similarity<br/>with every prompt]
+    T --> M
+    M --> A[Per attribute:<br/>softmax → label,<br/>score, top-3]
+    A --> O[Title and<br/>description<br/>from a template]
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16
