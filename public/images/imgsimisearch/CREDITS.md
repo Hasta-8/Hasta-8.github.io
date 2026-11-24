@@ -1,13 +1,14 @@
 # Photo credits: search.jpg
 
-A screenshot of the ImgSimiSearch UI searching a small demo index built from
-openly licensed Wikimedia Commons photos (not the benchmark or the private dataset).
+A screenshot of the ImgSimiSearch UI searching its demo index: 100 bird and animal
+photos from the Open Images V7 validation split. Every photo is CC BY 2.0
+(https://creativecommons.org/licenses/by/2.0/) by its Flickr author.
 
-| In the screenshot | Author | Licence | Source |
-|---|---|---|---|
-| Query photo | Windmemories | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:20230910_Sydney_Opera_House.jpg |
-| Result 1 (0.960) | Travellers & Tinkers | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:2013AU10.JPG |
-| Result 2 (0.853) | Chairman of the Joint Chiefs of Staff (Flickr) | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:181021-D-SW162-2097_(31592885728).jpg |
-| Result 3 (0.762) | www.davidmolloyphotography.com | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:2018.08.19.16.24.35-Sydney_Harbour.jpg |
-| Result 4 (0.757) | Acabashi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:The_Shard_Tower_Bridge_from_Pool_of_London_River_Thames_London_England.jpg |
-| Result 5 (0.746) | Acabashi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tower_Bridge_from_Pool_of_London_River_Thames_London_England_darker.jpg |
+| In the screenshot | Author | Source |
+|---|---|---|
+| Query photo (not in the index) | Joan Sorolla | https://www.flickr.com/photos/joansorolla/5339880972 |
+| Result 1 (0.913) | natalie419 | https://www.flickr.com/photos/natalie419/6250761014 |
+| Result 2 (0.907) | Spencer Wright | https://www.flickr.com/photos/spencer77/6112568367 |
+| Result 3 (0.861) | Kevin Walsh | https://www.flickr.com/photos/86624586@N00/109684404 |
+| Result 4 (0.856) | vagueonthehow | https://www.flickr.com/photos/vagueonthehow/3775471834 |
+| Result 5 (0.850) | Lawrie Skinner | https://www.flickr.com/photos/100649650@N08/14559294703 |

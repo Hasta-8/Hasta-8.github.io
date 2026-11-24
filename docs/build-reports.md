@@ -862,3 +862,11 @@ study's new evidence entry.
 |---|---|
 | Typecheck, lint, build | pass |
 | Layout audit, local preview (14 routes × 6 widths) | 0 problems |
+
+## Follow-up: demo dataset replaced (2026-11-24)
+
+The app's dataset was swapped for 100 openly licensed photos: Open Images V7 validation, 10 classes of birds
+and animals, 10 each, no photos labelled with people, all CC BY 2.0 (fetched by the ImgSimiSearch repo's
+`scripts/fetch_demo_dataset.py`). The index was rebuilt and promoted. The cover is now a zebra query (not in the
+index): four zebras (0.91–0.86), then a giraffe (0.85). The "(MVP)" heading was removed from the app. Credits are in
+`public/images/imgsimisearch/CREDITS.md`.

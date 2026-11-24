@@ -67,9 +67,9 @@ export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
       id: 'imgsimisearch-search',
       title: 'A search in the app',
       description:
-        'A photo of the Sydney Opera House that is not in the index returns the three other Opera House photos first (cosine similarity 0.96, 0.85, 0.76); with nothing else similar in this 14-photo demo index, two Tower Bridge photos fill the top 5. The demo index uses openly licensed Wikimedia Commons photos (Windmemories, Travellers & Tinkers, Acabashi: CC BY-SA; davidmolloyphotography.com, US Joint Chiefs of Staff: CC BY 2.0).',
+        'The demo index holds 100 bird and animal photos from Open Images V7 (10 classes, 10 photos each). A zebra photo that is not in the index returns four zebra photos first (cosine similarity 0.91–0.86), then a giraffe (0.85). Photos CC BY 2.0: query by Joan Sorolla; results by natalie419, Spencer Wright, Kevin Walsh, vagueonthehow and Lawrie Skinner (Flickr, via Open Images).',
       image: '/images/imgsimisearch/search.jpg',
-      alt: 'Image Similarity Search UI with five result photos and scores; the query photo of the Sydney Opera House is shown in the sixth cell',
+      alt: 'Image Similarity Search UI with five result photos and scores; the query photo, a zebra, is shown in the sixth cell',
       status: 'approved',
     },
   ],
