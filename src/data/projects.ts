@@ -149,6 +149,7 @@ export const projects: Project[] = [
     category: 'personal',
     status: 'reviewed',
     tags: ['CLIP', 'FAISS', 'Vector Search', 'FastAPI', 'React'],
+    image: '/images/imgsimisearch/search.jpg',
     metrics: [
       {
         label: 'mAP on INRIA Holidays (500 queries)',

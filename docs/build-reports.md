@@ -846,3 +846,19 @@ Scope: add the finished personal projects, correct the ShelfScan case study, pol
 - Whether to mark CervicalAI and Robotic Microscopy as reviewed (removes the "Case study draft" label).
 - YouTube links for the Garment and Glove walkthroughs (currently on GitHub releases).
 - Optional: a custom domain.
+
+---
+
+# Update: Image Similarity Search cover image (2026-11-24)
+
+The Image Similarity Search card had no screenshot. Added `public/images/imgsimisearch/search.jpg`:
+a real search in the app (CLIP ViT-B/32 + FAISS) against a 14-photo demo index built from openly
+licensed Wikimedia Commons photos, with the query photo shown in the empty sixth grid cell.
+The project's own dataset (private photos, no publishing licence) and the INRIA Holidays benchmark are
+not shown. Credits are in `public/images/imgsimisearch/CREDITS.md`, and they are summarised in the case
+study's new evidence entry.
+
+| Check | Result |
+|---|---|
+| Typecheck, lint, build | pass |
+| Layout audit, local preview (14 routes × 6 widths) | 0 problems |

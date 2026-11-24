@@ -62,6 +62,16 @@ export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
     'EXIF orientation isn’t applied before embedding, so some rotated photos score lower.',
     'No authentication or per-client rate limiting, so not for open public use.',
   ],
-  evidence: [],
+  evidence: [
+    {
+      id: 'imgsimisearch-search',
+      title: 'A search in the app',
+      description:
+        'A photo of the Sydney Opera House that is not in the index returns the three other Opera House photos first (cosine similarity 0.96, 0.85, 0.76); with nothing else similar in this 14-photo demo index, two Tower Bridge photos fill the top 5. The demo index uses openly licensed Wikimedia Commons photos (Windmemories, Travellers & Tinkers, Acabashi: CC BY-SA; davidmolloyphotography.com, US Joint Chiefs of Staff: CC BY 2.0).',
+      image: '/images/imgsimisearch/search.jpg',
+      alt: 'Image Similarity Search UI with five result photos and scores; the query photo of the Sydney Opera House is shown in the sixth cell',
+      status: 'approved',
+    },
+  ],
   disclosure: 'Personal work with no employer material. Benchmark images are not redistributed.',
 }
