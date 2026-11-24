@@ -26,7 +26,7 @@ export default function Projects() {
         <PageHeader
           eyebrow="Projects"
           title="Selected case studies"
-          description="Applied computer vision work across professional and personal projects. Professional engagements are described without exposing internal code, data, or unreleased results."
+          description="Applied computer vision and retrieval work across professional and personal projects. Personal projects are public, with code, demos and measured results; professional engagements are described without exposing internal code, data, or unreleased results."
         />
 
         <div className="mt-10 flex flex-wrap items-baseline justify-between gap-4 border-b border-line pb-5">

@@ -2,149 +2,119 @@ import type { ProjectCaseStudy } from '../../types'
 
 export const shelfScanCaseStudy: ProjectCaseStudy = {
   context:
-    'Personal project, developed independently of the professional engagements described elsewhere on this site. Because it is my own work, the architecture and the evaluation approach can be described in more detail here — but the measurements themselves are only published once they have been re-verified.',
+    'Personal project, developed independently of the professional engagements described elsewhere on this site. Code, evaluation scripts, results and a live demo are public.',
   problem:
-    'Object detection demos are usually reported as a single accuracy number, which hides the part that matters in practice: two detectors that score similarly can behave very differently once inference cost is included. The point of this project was to build a shelf detection pipeline where candidate models are compared on the same imagery and the same evaluation code, and where accuracy is reported next to the measured inference cost, so the trade-off is visible rather than implied.',
+    'A retail shelf photo holds a hundred or more products. The task is to find every product and to group the ones that look alike, as a visual approximation of "same product". The January 2026 version of this project worked end to end but had never been measured, and its README claimed things nobody had checked. The aim of the rebuild was a service whose detection and grouping quality are both measured with a documented protocol, and whose weaknesses are shown rather than hidden.',
   objectives: [
-    'Build an object detection pipeline over shelf imagery that produces consistent detections that can be compared across models.',
-    'Run a model comparison in which every candidate detector is evaluated through the same data pipeline and the same scoring code.',
-    'Measure inference performance for each candidate instead of assuming that a single accuracy metric is enough to choose a model.',
-    'Report the comparison honestly, including the cases where the better-accuracy model is not the better model to deploy.',
+    'Measure detection quality on held-out data with a standard protocol (COCO AP, precision and recall).',
+    'Measure grouping separately from detection, against hand-made labels of which products are the same.',
+    'Tune thresholds only by rules written down before the results were seen.',
+    'Ship it as a hardened API with tests, Docker, a demo and a visible failure gallery.',
   ],
   contributions: [
-    'Built the shelf detection pipeline, including data preparation, training, and inference.',
-    'Designed and ran the model comparison, keeping the evaluation harness identical across candidates so that the differences are attributable to the models.',
-    'Measured inference performance for each candidate and combined it with the accuracy results into a single comparison.',
-    'Documented the comparison setup and the open items that must be confirmed before the numbers are published.',
+    'Rebuilt the environment reproducibly (uv lock file, CPU-only PyTorch, pinned model revisions) and showed it reproduces the old output bit for bit.',
+    'Rewrote the Flask prototype as a FastAPI service: typed responses, upload validation, startup model loading, health and readiness checks, deterministic output.',
+    'Evaluated detection on 420 SKU-110K test images and grouping on 14 shelves I labelled with a purpose-built labelling tool.',
+    'Built a demo page that explains each grouping decision (the most similar crops and their cosine similarity), a static online copy, Docker, and a failure gallery on openly licensed photos.',
   ],
   approach: [
-    'Shelf imagery is prepared and labelled, then split into training and evaluation sets so that every candidate model is scored on data none of them has seen.',
-    'Each candidate detector is trained through the same pipeline, with the same data handling and the same augmentation policy, so that the comparison isolates the model.',
-    'All candidates are scored with a single evaluation harness, using one metric definition and one post-processing configuration.',
-    'Inference is measured for each candidate under the same conditions, so latency and throughput numbers describe the same workload for every model.',
-    'Accuracy and inference measurements are brought together into a single comparison, which is the artefact the project actually exists to produce.',
+    'Detection: a DETR ResNet-50 detector already fine-tuned on SKU-110K (400 object queries), confidence 0.8, IoU-based non-maximum suppression.',
+    'Grouping: each detected box is cropped and embedded with DINOv2-small; crops are clustered by cosine similarity with average-linkage agglomerative clustering.',
+    'Every experiment was registered with its success criteria before it ran, and failed predictions are reported as failed.',
+    'Threshold changes follow a pre-set rule: choose on one half of the labelled images, adopt only if the other half improves by a fixed margin.',
   ],
   architecture: [
     {
-      title: 'Shelf imagery',
+      title: 'Upload validation',
       description:
-        'Captured shelf scenes containing the product categories of interest, labelled for detection.',
+        'Format checked from the bytes (JPEG, PNG, WebP), size and pixel limits, EXIF orientation applied, one error shape for every failure.',
       status: 'verified',
     },
     {
-      title: 'Data preparation',
-      description:
-        'Labelling, train and evaluation splits, and augmentation applied consistently for every candidate model.',
+      title: 'Product detection',
+      description: 'DETR ResNet-50 fine-tuned on SKU-110K, pinned to a fixed revision; NMS removes duplicate boxes.',
       status: 'verified',
     },
     {
-      title: 'Candidate detectors',
-      description:
-        'A set of object detection models trained through the same pipeline; the specific candidates are pending confirmation before publication.',
-      status: 'pending',
-    },
-    {
-      title: 'Shared evaluation harness',
-      description:
-        'One scoring implementation, one metric definition, and one post-processing configuration used for every candidate.',
+      title: 'Crop embeddings',
+      description: 'DINOv2-small CLS embedding per product crop, L2-normalised.',
       status: 'verified',
     },
     {
-      title: 'Inference measurement',
+      title: 'Grouping',
       description:
-        'Inference performance measured for each candidate under identical conditions, so the comparison is like-for-like.',
+        'Agglomerative clustering on cosine distance; crops join a group when their average similarity is at least 0.6.',
       status: 'verified',
     },
     {
-      title: 'Comparison summary',
+      title: 'Response and demo',
       description:
-        'Accuracy and inference cost combined into a single view of the trade-off, which is the deliverable of the project.',
+        'JSON with boxes, groups and timings, an annotated image, and an optional "explain" mode that returns each crop’s nearest neighbours.',
       status: 'verified',
     },
   ],
   tools: [
-    {
-      name: 'Python',
-      role: 'Implementation language for the pipeline, the evaluation harness, and the benchmarks',
-      status: 'verified',
-    },
-    {
-      name: 'Object detection models under comparison',
-      role: 'The candidate detectors evaluated against each other',
-      status: 'pending',
-    },
-    {
-      name: 'Deep learning framework',
-      role: 'Framework and version used for training and inference',
-      status: 'pending',
-    },
-    {
-      name: 'Inference runtime and device',
-      role: 'Runtime and hardware on which latency and throughput were measured',
-      status: 'pending',
-    },
-    {
-      name: 'Evaluation and benchmarking tooling',
-      role: 'Metric implementation and measurement scripts used for the comparison',
-      status: 'pending',
-    },
+    { name: 'PyTorch + Transformers', role: 'DETR detector and DINOv2 embedder, CPU-only', status: 'verified' },
+    { name: 'scikit-learn', role: 'Agglomerative clustering', status: 'verified' },
+    { name: 'FastAPI + Pydantic', role: 'Typed API, validation, OpenAPI docs', status: 'verified' },
+    { name: 'pycocotools', role: 'COCO detection metrics', status: 'verified' },
+    { name: 'uv, pytest, ruff, GitHub Actions', role: 'Reproducible environment, tests and CI', status: 'verified' },
+    { name: 'Docker', role: 'Container with models mounted read-only', status: 'verified' },
   ],
   dataset: {
-    name: 'Shelf imagery collected for this project',
+    name: 'SKU-110K (test split) and 14 hand-labelled shelves',
     description:
-      'Images captured for the project and labelled for detection. Scene count, class taxonomy, and split composition are pending confirmation and are not published yet.',
-    status: 'pending',
+      'Detection: 420 SKU-110K test images with 61,461 annotated products, a split the detector never trained on. Grouping: 14 of those images (1,526 products) that I labelled by which products are identical. The dataset licence forbids redistribution, so only aggregate numbers are published; the demo uses openly licensed Wikimedia Commons photos.',
+    status: 'verified',
   },
   evaluation: [
-    'Every candidate is evaluated on the same held-out evaluation split with the same metric implementation, so differences in the results are attributable to the models rather than to the harness.',
-    'Detection accuracy is reported with the standard detection metric for the task.',
-    'Inference performance is measured for each candidate under the same conditions, and reported alongside accuracy.',
-    'Candidate names, dataset composition, and the measured numbers are still being confirmed, so the tables below show the metrics that will be published rather than values that are not yet verified.',
+    'Detection (COCO protocol, up to 400 detections per image): AP 0.425, AP50 0.813. At the deployed threshold: precision 0.766, recall 0.837, F1 0.800. My prediction (AP 0.53–0.61, from the model card) failed and is reported as failed.',
+    'Grouping: pairwise F1 0.25 at the original threshold, 0.32 at the adopted one (chosen on 7 images, confirmed on the other 7: 0.21 → 0.34). No threshold reaches much above 0.3.',
+    'A detection threshold sweep over 70 settings found nothing that passed the pre-set rule, so the original detection settings stayed.',
+    'Latency on a 4-core laptop CPU: detection about 3 s per image; grouping adds about 0.14 s per product (5–9 s for 30–45 products, 35–40 s for 250).',
   ],
   challenges: [
     {
-      challenge:
-        'A comparison is only meaningful if every candidate is treated identically, otherwise the harness differences are mistaken for model differences.',
+      challenge: 'The detector’s published score (58.9 mAP) could not be reproduced.',
       decision:
-        'One evaluation harness, one metric definition, and one post-processing configuration are used for all candidates, and the setup is shared rather than re-implemented per model.',
+        'Investigated (NMS ruled out, a pycocotools 100-detection cap found and worked around) and published only my own measured numbers.',
     },
     {
-      challenge:
-        'Accuracy alone hides the deployment cost of a model, and a comparison that ignores inference cost produces the wrong recommendation.',
-      decision:
-        'Inference performance is measured for every candidate under identical conditions and reported next to accuracy, so the trade-off is part of the result.',
+      challenge: 'Grouping quality had no ground truth.',
+      decision: 'Built a labelling tool and labelled 14 shelves; scored with pairwise F1 and adjusted Rand index.',
     },
     {
-      challenge:
-        'Published comparison numbers invite the question of how they were produced.',
+      challenge: 'Grouping turned out weak.',
       decision:
-        'The metric definition, split policy, and measurement conditions are documented, and values that are not yet re-verified are left unpublished rather than approximated.',
+        'Said so plainly in the README and demo, explained why (the embedding sees shape and colour, not label text), and showed it in a failure gallery.',
     },
   ],
   limitations: [
-    'The candidate model names, the dataset composition, and the measured accuracy and latency values are pending confirmation and are not published yet. The metric rows below mark the values that will appear once they are verified.',
-    'No repository or demo is published for this project yet, even though it is personal work, because the comparison harness has not been cleaned up for release.',
-    'The evaluation covers the shelf detection scenario only; conclusions do not extend to other domains, scenes, or hardware.',
-    'No claim is made about production readiness, and the published result will describe an offline evaluation rather than a live deployment.',
+    'Grouping is visual similarity, not product identity: lookalike packs of different products share a group (pairwise F1 about 0.3).',
+    'Price tags, transparent packaging, loose goods and steep camera angles fail (see the failure gallery).',
+    'Latency grows with shelf density because every crop is embedded.',
+    'Measured on SKU-110K shelves only; other stores and cameras may differ.',
   ],
   evidence: [
     {
-      id: 'shelfscan-detection-samples',
-      title: 'Detection samples from the evaluation set',
+      id: 'shelfscan-why',
+      title: 'Why is it in this group?',
       description:
-        'Approved visual of shelf detections produced by the evaluated models, to be published alongside the comparison.',
-      image: '/images/shelfscan/detection-samples.png',
-      status: 'placeholder',
+        'The demo explains each grouping decision: a selected honey jar’s nearest crops are other honey varieties at similarity 0.78–0.89, which is why different products share a group. Photo: culinary123, CC BY-SA 3.0, Wikimedia Commons.',
+      image: '/images/shelfscan/why-this-group.jpg',
+      alt: 'ShelfScan demo page with a honey jar selected and its most similar crops listed with similarity scores',
+      status: 'approved',
     },
     {
-      id: 'shelfscan-comparison-chart',
-      title: 'Accuracy versus inference cost comparison',
+      id: 'shelfscan-failure',
+      title: 'Failure gallery',
       description:
-        'Chart placing each candidate by detection accuracy and measured inference cost, which is the central artefact of the project.',
-      image: '/images/shelfscan/comparison-chart.png',
-      status: 'placeholder',
+        'Different products, even different brands, merged into one group: the kind of error the measured F1 describes. Photo: culinary123, CC BY-SA 3.0, Wikimedia Commons.',
+      image: '/images/shelfscan/failure-merged-products.jpg',
+      alt: 'Syrup and honey bottles boxed in group colours, with different products sharing a colour',
+      status: 'approved',
     },
   ],
   disclosure:
-    'ShelfScan is personal work and contains no employer material. Measurements, model names, and dataset details are published only after they have been re-verified.',
+    'Personal work with no employer material. SKU-110K images are not redistributed; screenshots use openly licensed Wikimedia Commons photos.',
 }

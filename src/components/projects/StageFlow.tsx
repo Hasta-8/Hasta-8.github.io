@@ -9,7 +9,12 @@ export default function StageFlow({ stages }: StageFlowProps) {
   return (
     <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
       {stages.map((stage, index) => (
-        <li key={stage.title} className="bg-surface-raised p-6">
+        <li
+          key={stage.title}
+          className={`bg-surface-raised p-6 ${
+            stages.length % 2 === 1 && index === stages.length - 1 ? 'sm:col-span-2' : ''
+          }`}
+        >
           <div className="flex items-center justify-between gap-4">
             <span className="font-mono text-xs tracking-[0.16em] text-ink-subtle">
               {String(index + 1).padStart(2, '0')}

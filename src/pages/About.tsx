@@ -184,7 +184,7 @@ export default function About() {
           <div className="mt-10 max-w-2xl border-t border-line pt-5">
             <p className="eyebrow">Working toolkit</p>
             <p className="mt-2 text-sm text-ink-muted">
-              Python · PyTorch · OpenCV · Linux · Git · edge deployment
+              Python · PyTorch · OpenCV · FastAPI · Docker · Linux · Git · edge deployment
             </p>
           </div>
         </Container>

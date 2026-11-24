@@ -1,9 +1,9 @@
 # AI/ML Engineer Portfolio — Project Instructions
 
 Owner: Debadri Chatterjee
-Repo: `ai_ml_portfolio` (app lives directly at the repo root; Git branch `main`, no commits made yet)
+Repo: `ai_ml_portfolio` locally, published as `Hasta-8/Hasta-8.github.io` (app at the repo root; branch `main`)
 Source of truth: `AI_ML_Portfolio_Cloudflare_Workplan.pdf` — 7 pages, 44,330 bytes, md5 `253d566663f1bc26d9cc501dd7c71f43`. This file must never be modified.
-Deploy target: Cloudflare Pages, static hosting, build command `npm run build`, output directory `dist` (`public/_redirects` provides the SPA fallback).
+Deploy target: **GitHub Pages user site, https://hasta-8.github.io/** (owner's decision 2026-11-24, instead of the workplan's Cloudflare Pages). `.github/workflows/deploy.yml` builds on every push to `main` and copies `index.html` to `404.html` as the SPA fallback (`public/_redirects` is Cloudflare's equivalent, kept harmless).
 
 ## Stack
 
@@ -30,13 +30,13 @@ Verification order for any milestone: `typecheck` → `lint` → `build` → pre
 
 ## Milestone report rule (mandatory)
 
-A milestone is **not** complete until its report exists in `README.md`. Required sequence:
+A milestone is **not** complete until its report exists in `docs/build-reports.md` (moved from `README.md` on 2026-11-24; `README.md` is now the public repository page). Required sequence:
 
 1. Implement.
 2. Validate with the commands above and record the actual output.
-3. Append a new `# Milestone N Report — <Title>` section to the **end** of `README.md`.
+3. Append a new `# Milestone N Report — <Title>` section to the **end** of `docs/build-reports.md`.
 4. Update the work-log row below and the README index row; refresh `Last updated`.
-5. State in the final chat message that `README.md` was updated, and give the line range to copy.
+5. State in the final chat message that `docs/build-reports.md` was updated, and give the line range to copy.
 
 Rules for the report:
 
@@ -74,8 +74,7 @@ Scope: <one sentence>. Workplan phase: <phase>.
 | Addendum — Contact page, resume access, and email-link behavior (`Contact.tsx`, `Navbar.tsx`, `About.tsx`, `ContactCta.tsx`, `Footer.tsx`, `src/data/profile.ts`) | Phase 2 — Brand pages | Complete | `#m3` addenda |
 | Addendum — Experience and Education (`Experience.tsx`, `About.tsx`, `experience.ts`, `education.ts`) | Phase 2 — Brand pages | Complete | `#m3` addenda |
 | Addendum — Skills taxonomy, homepage preview, and contrast pass (`skills.ts`, `Skills.tsx`, `Expertise.tsx`, `ExperiencePreview.tsx`, `SkillChip.tsx`, `Chip.tsx`, `types/index.ts`, `Hero.tsx`, `ProjectCard.tsx`, `Projects.tsx`, `Contact.tsx`) | Phase 2 — Brand pages | Complete | `#m3` addenda |
-| Milestone 4 — QA and polish | Phase 4 — QA and polish | Next | — |
-| Milestone 5 — Deploy | Phase 5 — Deploy | Pending | — |
+| Milestone 4 — Personal projects, QA and deploy (phases 3–5) | Phases 3–5 | Complete | [docs/build-reports.md#m4](docs/build-reports.md#m4) |
 | Milestone 6 — Iterate | Phase 6 — Iterate | Ongoing | — |
 
 Known open owner inputs: approved case-study images (7 placeholder slots), CervicalAI robotics/ShelfScan metrics, stack confirmations, repository/demo links, review-state flips (`draft` → `reviewed`), contact/resume publication confirmation, Experience/Education copy confirmation (Aimil, MiMD tool naming, education fields), and final Skills wording/tool-membership confirmation. The homepage preview length is resolved at three bullets. Full list in the Milestone 3 report, sections 6–7 (including the contact/resume, Experience/Education, and Skills addenda).
@@ -83,9 +82,9 @@ Known open owner inputs: approved case-study images (7 placeholder slots), Cervi
 ## Non-negotiables
 
 - Do not modify `AI_ML_Portfolio_Cloudflare_Workplan.pdf`; check its md5 at the end of a session.
-- Do not commit, push, or deploy unless explicitly asked. Leave changes in the working tree and say so.
+- Commit, push and deploy only when the owner asks (the owner asked on 2026-11-24 to publish the site). No Claude/AI attribution lines in commits.
 - Do not add a dependency without explicit approval.
-- Content integrity: the only published figure is 87.33% mAP@50 (RF-DETR, `cs-cervical-7a`), always shown with "internal verification was ongoing… not a clinical validation". Unknown specifics stay `status: 'pending' | 'not_disclosed'`; never invent frameworks, hardware, metrics, or links.
+- Content integrity: for **professional** work the only published figure is 87.33% mAP@50 (RF-DETR, `cs-cervical-7a`), always shown with "internal verification was ongoing… not a clinical validation"; the professional entries stay exactly as the owner approved them. **Personal** project figures must match the numbers in each project's public README. Never invent frameworks, hardware, metrics, or links.
 - No proprietary code, slides, private data, or hardware identifiers beyond the owner-approved Experience names. State professional vs personal work explicitly.
 - Preserve the design system (`--color-*` tokens, `Container`, `Section`, `surface-card`, `.eyebrow`, `.hero-surface`) and existing routing.
 

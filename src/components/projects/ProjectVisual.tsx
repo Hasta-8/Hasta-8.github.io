@@ -1,4 +1,4 @@
-import { Boxes, Microscope, ScanLine } from 'lucide-react'
+import { Boxes, FileSearch, Hand, Images, Microscope, ScanLine, Shirt } from 'lucide-react'
 import type { ComponentType } from 'react'
 import type { Project } from '../../types'
 
@@ -10,6 +10,10 @@ const iconBySlug: Record<string, ComponentType<{ className?: string }>> = {
   cervicalai: Microscope,
   'robotic-microscopy': ScanLine,
   shelfscan: Boxes,
+  'production-rag': FileSearch,
+  imgsimisearch: Images,
+  garment: Shirt,
+  glove: Hand,
 }
 
 const labelByCategory: Record<Project['category'], string> = {
@@ -18,11 +22,25 @@ const labelByCategory: Record<Project['category'], string> = {
 }
 
 /**
- * Decorative placeholder used until approved project imagery is added under
- * `public/images/`. It intentionally renders no fabricated screenshot.
+ * The project's screenshot when one is approved (`project.image`, under
+ * `public/images/`); otherwise a decorative placeholder. It never renders a
+ * fabricated screenshot.
  */
 export default function ProjectVisual({ project }: ProjectVisualProps) {
   const Icon = iconBySlug[project.slug] ?? ScanLine
+
+  if (project.image) {
+    return (
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-surface">
+        <img
+          src={project.image}
+          alt=""
+          loading="lazy"
+          className="size-full object-cover object-top"
+        />
+      </div>
+    )
+  }
 
   return (
     <div
