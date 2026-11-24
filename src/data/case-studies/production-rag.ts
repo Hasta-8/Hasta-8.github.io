@@ -4,7 +4,7 @@ export const productionRagCaseStudy: ProjectCaseStudy = {
   context:
     'Personal project. Code, evaluation sets, results and a walkthrough video are public. Everything runs locally on a laptop CPU: no paid APIs, and no data leaves the machine.',
   problem:
-    'Question answering over documents is easy to demo and hard to trust: models answer confidently when the evidence is missing, cite the wrong source, or credit one model’s numbers to a similar one. The goal was a retrieval-augmented system over 28 openly licensed AI/ML papers that cites a page for every sentence, declines rather than guesses, and is measured on questions written to catch exactly those failures.',
+    'Ask a chatbot about a research paper and it will usually sound sure of itself, even when it is making things up, quoting the wrong paper, or mixing up two AI models with similar names. That’s fine for small talk and a real problem when someone has to rely on the answer. This project is a research assistant for 28 freely shareable AI papers that behaves more like a careful librarian: every sentence it writes points to the page it came from, so you can check it in one click, and when the papers don’t hold the answer it says so instead of guessing. It runs entirely on an ordinary laptop, and it was tested with trick questions written to catch it out.',
   objectives: [
     'Answer only from the corpus, with a page citation for every sentence.',
     'Decline questions the corpus can’t answer, including near-miss "trap" questions about models it doesn’t cover.',

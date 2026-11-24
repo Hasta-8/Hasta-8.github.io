@@ -3,7 +3,7 @@ import type { ProjectCaseStudy } from '../../types'
 export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
   context: 'Personal project. Code, tests and benchmark tooling are public.',
   problem:
-    'Content-based image search is a few lines with CLIP and FAISS, and an early version of this project did just that, except that its indexing and search paths used random placeholder vectors instead of the real embedder. The rebuild set out to make retrieval correct and to treat the index like a software release: reproducible, versioned, validated at startup and measured on a public benchmark.',
+    'Ever wanted to find photos like one you already have, without knowing what to type into a search box? Image Similarity Search lets you upload a picture, say a zebra, and get back the most similar photos from a collection, ranked by how close they are. It compares what is actually in the images, not file names or tags. Behind the scenes, the photo collection is handled like a proper software release: each version is saved, checked before it goes live and tested on a public benchmark, so the search keeps giving the right answers as the collection changes.',
   objectives: [
     'One embedding service shared by indexing and search, with the model revision pinned.',
     'Reproducible index builds released as immutable, validated versions with atomic activation and rollback.',
@@ -11,7 +11,7 @@ export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
     'Harden the API for public demos.',
   ],
   contributions: [
-    'Replaced the placeholder vectors with a single CLIP embedding service used by both indexing and search.',
+    'Built a single CLIP embedding service used by both indexing and search.',
     'Built the release workflow: deterministic rebuilds, content fingerprints, manifests, validation, an atomic pointer for activation and rollback.',
     'Made the service fail closed: it refuses to serve if the active index was built with a different model revision.',
     'Added demo hardening (upload limits, timeouts, concurrency caps, safe file serving) and 196 automated tests.',
@@ -63,7 +63,7 @@ export const imgSimiSearchCaseStudy: ProjectCaseStudy = {
   ],
   challenges: [
     {
-      challenge: 'The first version silently returned meaningless results (random vectors).',
+      challenge: 'If indexing and search embed images differently, search silently returns meaningless results.',
       decision: 'One shared embedding service, tests that check real embeddings, and a startup check that the index matches the model.',
     },
     {

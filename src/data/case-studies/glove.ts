@@ -3,7 +3,7 @@ import type { ProjectCaseStudy } from '../../types'
 export const gloveCaseStudy: ProjectCaseStudy = {
   context: 'Personal project. Code, the trained model, evaluation scripts and a live demo are public.',
   problem:
-    'Glove compliance checks need a detector that finds hands in factory camera images and says whether each is gloved. I fine-tuned YOLOv8s for this in January 2026 and its validation scores looked strong (mAP50 0.85). The follow-up question was whether those scores describe new scenes, and what kinds of mistakes the model makes.',
+    'On a factory floor, a missing glove can be the difference between a normal shift and an injury, and nobody can watch every pair of hands all day. This project looks at factory camera images, finds each hand and marks it green for gloved or red for bare. It also asks the honest question behind any good-looking score: half of the usual test pictures turned out to be near-copies of the ones the model learned from, a bit like a student who has already seen the exam paper. So it is measured again on scenes it hasn’t seen, with a clear look at the kinds of mistakes it makes.',
   objectives: [
     'Make the model available and verifiable: published weights with a checksum and one supported version.',
     'Check the validation set for leakage from training, and report metrics without it.',
@@ -13,7 +13,7 @@ export const gloveCaseStudy: ProjectCaseStudy = {
   contributions: [
     'Fine-tuned YOLOv8s (50 epochs, 640 px) on an industrial PPE dataset filtered to gloved and bare hands.',
     'Found that 52% of validation images are near-copies of training frames (same CCTV cameras, moments apart) with a perceptual-hash check, and re-measured without them.',
-    'Showed that passing the image array straight to the model matches the CLI on all 882 validation images, while the old temporary-file step changed the boxes on 83% of them.',
+    'Showed that passing the image array straight to the model matches the CLI on all 882 validation images, whereas a temporary-file round trip changes the boxes on 83% of them.',
     'Published the model as a release with its SHA-256 and built a FastAPI service, tests, Docker and a demo.',
   ],
   approach: [

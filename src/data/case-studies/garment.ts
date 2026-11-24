@@ -3,7 +3,7 @@ import type { ProjectCaseStudy } from '../../types'
 export const garmentCaseStudy: ProjectCaseStudy = {
   context: 'Personal project. Code, evaluation scripts, results and a live demo are public.',
   problem:
-    'Catalogue teams describe every garment by hand: category, colour, pattern, sleeve type, the section it belongs in. Fashion-CLIP can do this zero-shot by comparing the photo with a text prompt per candidate label, with no training. The January 2026 version returned labels with no scores, ran the model five times per request and had never been measured. The rebuild set out to return scored, ranked answers quickly and to find out how often they are right.',
+    'Every item in an online clothing shop needs a description: is it a shirt or a dress, what colour, striped or plain, long or short sleeves, men’s or women’s section? Usually a person types this in by hand, thousands of times over. This project lets an AI model look at the product photo and fill in those details itself in a fraction of a second, without first being trained on the shop’s catalogue. Each answer comes with a confidence score, so a person only needs to double-check the uncertain ones, and every kind of answer is measured for how often it is actually right.',
   objectives: [
     'Return each attribute with a score and ranked alternatives, and say plainly that the scores are not probabilities.',
     'Cut the cost per request without changing the answers.',
@@ -11,7 +11,7 @@ export const garmentCaseStudy: ProjectCaseStudy = {
     'Decide when to trust an answer, using a threshold chosen on separate data.',
   ],
   contributions: [
-    'Rewrote the scoring so every candidate prompt is encoded once at startup: one image pass per request, about 8× faster, with identical labels on the January samples.',
+    'Encoded every candidate prompt once at startup, so each request needs a single image pass.',
     'Built a FastAPI service with typed results, upload validation, health and readiness checks, tests in CI and Docker.',
     'Evaluated it on 2,115 held-out catalogue photos and on 100 photos labelled by hand for sleeve and pattern.',
     'Found and fixed a prompt bug that made the gender-section answer "unisex" for almost every garment.',
@@ -50,9 +50,9 @@ export const garmentCaseStudy: ProjectCaseStudy = {
   },
   evaluation: [
     'Held-out accuracy: gender section 0.94, sleeve 0.83, category 0.74, colour 0.60, pattern 0.57.',
-    'Gender section was 0.14 with the January prompts (it answered "unisex" almost always); the reworded prompts reach 0.94. Rewording colour and category didn’t help, so they stayed.',
+    'Gender section reaches 0.94 with reworded prompts; plain prompts scored 0.14 because the model answered "unisex" almost always. Rewording colour and category didn’t help, so they stayed.',
     'Keeping only category answers with a score of at least 0.88 answers 60% of photos at 89% accuracy; for colour and gender no threshold reaches 90%.',
-    'About 60 ms per image on a laptop CPU, against about 0.5 s for the January code.',
+    'About 60 ms per image on a laptop CPU.',
   ],
   challenges: [
     {

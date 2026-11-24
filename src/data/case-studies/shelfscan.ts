@@ -4,7 +4,7 @@ export const shelfScanCaseStudy: ProjectCaseStudy = {
   context:
     'Personal project, developed independently of the professional engagements described elsewhere on this site. Code, evaluation scripts, results and a live demo are public.',
   problem:
-    'A retail shelf photo holds a hundred or more products. The task is to find every product and to group the ones that look alike, as a visual approximation of "same product". The January 2026 version of this project worked end to end but had never been measured, and its README claimed things nobody had checked. The aim of the rebuild was a service whose detection and grouping quality are both measured with a documented protocol, and whose weaknesses are shown rather than hidden.',
+    'Picture a supermarket shelf: a hundred or more boxes, bottles and packets squeezed side by side. Shops want to know what is on it, what has run out and how much space each brand gets, and often someone still counts by hand. ShelfScan takes one photo of a shelf, draws a box around every product it can see, and groups the ones that look the same, so twelve cans of the same soup end up in one pile. It also measures how many products it finds and how good its groups are, and openly shows the shelves where it still gets confused.',
   objectives: [
     'Measure detection quality on held-out data with a standard protocol (COCO AP, precision and recall).',
     'Measure grouping separately from detection, against hand-made labels of which products are the same.',
@@ -12,7 +12,7 @@ export const shelfScanCaseStudy: ProjectCaseStudy = {
     'Ship it as a hardened API with tests, Docker, a demo and a visible failure gallery.',
   ],
   contributions: [
-    'Rebuilt the environment reproducibly (uv lock file, CPU-only PyTorch, pinned model revisions) and showed it reproduces the old output bit for bit.',
+    'Made the environment reproducible (uv lock file, CPU-only PyTorch, pinned model revisions), verified to give bit-identical output.',
     'Rewrote the Flask prototype as a FastAPI service: typed responses, upload validation, startup model loading, health and readiness checks, deterministic output.',
     'Evaluated detection on 420 SKU-110K test images and grouping on 14 shelves I labelled with a purpose-built labelling tool.',
     'Built a demo page that explains each grouping decision (the most similar crops and their cosine similarity), a static online copy, Docker, and a failure gallery on openly licensed photos.',
@@ -77,8 +77,8 @@ export const shelfScanCaseStudy: ProjectCaseStudy = {
   },
   evaluation: [
     'Detection (COCO protocol, up to 400 detections per image): AP 0.425, AP50 0.813. At the deployed threshold: precision 0.766, recall 0.837, F1 0.800. My prediction (AP 0.53–0.61, from the model card) failed and is reported as failed.',
-    'Grouping: pairwise F1 0.25 at the original threshold, 0.32 at the adopted one (chosen on 7 images, confirmed on the other 7: 0.21 → 0.34). No threshold reaches much above 0.3.',
-    'A detection threshold sweep over 70 settings found nothing that passed the pre-set rule, so the original detection settings stayed.',
+    'Grouping: pairwise F1 0.25 at the default threshold, 0.32 at the adopted one (chosen on 7 images, confirmed on the other 7: 0.21 → 0.34). No threshold reaches much above 0.3.',
+    'A detection threshold sweep over 70 settings found nothing that passed the pre-set rule, so the default detection settings stayed.',
     'Latency on a 4-core laptop CPU: detection about 3 s per image; grouping adds about 0.14 s per product (5–9 s for 30–45 products, 35–40 s for 250).',
   ],
   challenges: [
