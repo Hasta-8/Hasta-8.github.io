@@ -158,7 +158,11 @@ export const projects: Project[] = [
         note: 'Official scorer; INRIA’s own 2008 system scores 0.746. Median search latency about 270 ms on a laptop CPU.',
       },
     ],
-    links: [{ label: 'GitHub repository', href: 'https://github.com/Hasta-8/Image_Similarity_Search' }],
+    links: [
+      { label: 'GitHub repository', href: 'https://github.com/Hasta-8/Image_Similarity_Search' },
+      // Placeholder until the walkthrough is on YouTube: replace href and drop `pending`.
+      { label: 'Walkthrough video', href: 'https://youtu.be/VIDEO_PENDING', pending: true },
+    ],
     caseStudy: caseStudies.imgsimisearch,
   },
   {

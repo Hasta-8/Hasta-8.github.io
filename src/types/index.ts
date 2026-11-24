@@ -1,6 +1,8 @@
 export interface ExternalLink {
   label: string
   href: string
+  /** Not published yet (e.g. a video still to be uploaded): shown as "coming soon", not linked. */
+  pending?: boolean
 }
 
 export interface ProfileLink {

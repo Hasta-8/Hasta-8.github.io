@@ -1,4 +1,4 @@
-import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import CaseStudyHeader from '../components/projects/CaseStudyHeader'
 import EvidenceGrid from '../components/projects/EvidenceGrid'
@@ -214,36 +214,11 @@ export default function ProjectDetail() {
             <Section
               id="evidence"
               eyebrow="08 — Evidence"
-              title="Visual evidence and links"
-              description="Approved visuals, and any public code or demo that can be linked without exposing protected material."
+              title="Visual evidence"
+              description="Approved screenshots and figures."
             >
               <EvidenceGrid evidence={caseStudy.evidence} />
 
-              <h3 className="mt-12 text-lg">Code, demo, and data</h3>
-              {project.links.length > 0 ? (
-                <ul className="mt-5 grid gap-4 sm:grid-cols-2">
-                  {project.links.map((link) => (
-                    <li key={link.href} className="surface-card p-5">
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
-                      >
-                        {link.label}
-                        <ExternalLink className="size-3.5" aria-hidden="true" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ink-muted">
-                  No public repository, demo, or dataset link is published for this project.
-                  {project.category === 'professional'
-                    ? ' This is professional work: internal code, slides, and data stay inside the engagement, so the case study describes the engineering rather than linking to it.'
-                    : ' The evaluation harness still needs to be cleaned up for release.'}
-                </p>
-              )}
             </Section>
           </>
         ) : (

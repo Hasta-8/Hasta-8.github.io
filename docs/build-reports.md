@@ -844,7 +844,7 @@ Scope: add the finished personal projects, correct the ShelfScan case study, pol
 ## 6. Content and assets still needed (owner inputs)
 
 - Whether to mark CervicalAI and Robotic Microscopy as reviewed (removes the "Case study draft" label).
-- YouTube links for the Garment and Glove walkthroughs (currently on GitHub releases).
+- YouTube links for the Garment and Glove walkthroughs (currently on GitHub releases), and the Image Similarity Search walkthrough (not recorded yet; "coming soon" placeholder).
 - Optional: a custom domain.
 
 ---
@@ -870,3 +870,13 @@ and animals, 10 each, no photos labelled with people, all CC BY 2.0 (fetched by 
 `scripts/fetch_demo_dataset.py`). The index was rebuilt and promoted. The cover is now a zebra query (not in the
 index): four zebras (0.91–0.86), then a giraffe (0.85). The "(MVP)" heading was removed from the app. Credits are in
 `public/images/imgsimisearch/CREDITS.md`.
+
+## Follow-up: project links moved to the top (2026-11-24)
+
+On every project page, the code, demo and video links now sit under the summary as buttons (`ProjectLinks.tsx`),
+replacing the four-box strip (engagement, case-study status, public code, evidence count) and the
+"Code, demo, and data" list at the bottom. Professional projects, which have no public links, show one line
+instead: professional work at MiMD Lab, IIT Delhi, with code and data kept inside the engagement. A link
+with `pending: true` renders as "· coming soon" and is not clickable. Image Similarity Search uses one for its
+walkthrough video (placeholder `https://youtu.be/VIDEO_PENDING`; tracked in that project's report). Layout audit:
+0 problems.

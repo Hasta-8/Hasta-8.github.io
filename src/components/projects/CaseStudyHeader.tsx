@@ -2,6 +2,7 @@ import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Project } from '../../types'
 import Chip from '../ui/Chip'
+import ProjectLinks from './ProjectLinks'
 import ProjectVisual from './ProjectVisual'
 
 interface CaseStudyHeaderProps {
@@ -9,35 +10,6 @@ interface CaseStudyHeaderProps {
 }
 
 export default function CaseStudyHeader({ project }: CaseStudyHeaderProps) {
-  const approvedEvidence = project.caseStudy?.evidence.filter(
-    (item) => item.status === 'approved',
-  ).length
-
-  const meta = [
-    {
-      label: 'Engagement',
-      value:
-        project.category === 'professional'
-          ? 'Professional work · MiMD Lab, IIT Delhi'
-          : 'Personal project',
-    },
-    {
-      label: 'Case study',
-      value: project.status === 'draft' ? 'Draft · awaiting review' : 'Reviewed',
-    },
-    {
-      label: 'Public code or demo',
-      value: project.links.length > 0 ? 'Linked below' : 'Not published',
-    },
-    {
-      label: 'Visual evidence',
-      value:
-        approvedEvidence && approvedEvidence > 0
-          ? `${approvedEvidence} approved`
-          : 'Placeholders in place',
-    },
-  ]
-
   return (
     <header className="border-b border-line pb-12">
       <nav aria-label="Breadcrumb">
@@ -66,7 +38,9 @@ export default function CaseStudyHeader({ project }: CaseStudyHeaderProps) {
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">{project.summary}</p>
 
-          <ul className="mt-8 flex flex-wrap gap-2">
+          <ProjectLinks project={project} />
+
+          <ul className="mt-6 flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <li key={tag}>
                 <Chip variant="accent">{tag}</Chip>
@@ -78,16 +52,6 @@ export default function CaseStudyHeader({ project }: CaseStudyHeaderProps) {
         <ProjectVisual project={project} />
       </div>
 
-      <dl className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-        {meta.map((item) => (
-          <div key={item.label} className="bg-surface-raised px-5 py-4">
-            <dt className="font-mono text-[0.65rem] tracking-[0.16em] text-ink-subtle uppercase">
-              {item.label}
-            </dt>
-            <dd className="mt-1.5 text-sm text-ink">{item.value}</dd>
-          </div>
-        ))}
-      </dl>
     </header>
   )
 }
