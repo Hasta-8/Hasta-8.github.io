@@ -36,19 +36,9 @@ export default function EvidenceGrid({ evidence }: EvidenceGridProps) {
             )}
 
             <div className="p-6">
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="text-base">{item.title}</h3>
-                <span className="shrink-0 rounded-full border border-dashed border-line-strong px-2.5 py-0.5 font-mono text-[0.65rem] tracking-[0.14em] text-ink-subtle uppercase">
-                  {isApproved ? 'Approved' : 'Placeholder'}
-                </span>
-              </div>
+              <h3 className="text-base">{item.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.description}</p>
 
-              {!isApproved && item.image ? (
-                <p className="mt-4 font-mono text-xs break-all text-ink-subtle">
-                  Replace with: {item.image}
-                </p>
-              ) : null}
             </div>
           </li>
         )

@@ -38,6 +38,9 @@ export default function ProjectDetail() {
 
   const caseStudy = project.caseStudy
   const relatedProjects = getRelatedProjects(project.slug)
+  // Sections after Results are numbered from it, so a page without results has no gap.
+  const after = project.metrics.length > 0 ? 6 : 5
+  const num = (n: number) => String(n).padStart(2, '0')
 
   return (
     <Container size="lg">
@@ -119,7 +122,7 @@ export default function ProjectDetail() {
               id="stack"
               eyebrow="03 — Stack"
               title="Models, algorithms, and tools"
-              description="Everything used, with the status of each item stated explicitly. Entries that cannot be disclosed say so instead of being guessed."
+              description="The main tools and what each one does in the project."
             >
               <ToolList tools={caseStudy.tools} />
             </Section>
@@ -151,18 +154,20 @@ export default function ProjectDetail() {
               </ul>
             </Section>
 
-            <Section
-              id="results"
-              eyebrow="05 — Results"
-              title="Measured results and their qualifications"
-              description="Each figure with the conditions it was measured under."
-            >
-              <MetricTable metrics={project.metrics} caption={`Measured results for ${project.title}`} />
-            </Section>
+            {project.metrics.length > 0 ? (
+              <Section
+                id="results"
+                eyebrow="05 — Results"
+                title="Measured results and their qualifications"
+                description="Each figure with the conditions it was measured under."
+              >
+                  <MetricTable metrics={project.metrics} caption={`Measured results for ${project.title}`} />
+              </Section>
+            ) : null}
 
             <Section
               id="challenges"
-              eyebrow="06 — Engineering decisions"
+              eyebrow={`${num(after)} — Engineering decisions`}
               title="Challenges and how they were handled"
               description="The parts of the work where the engineering judgement was the actual contribution."
             >
@@ -182,7 +187,7 @@ export default function ProjectDetail() {
 
             <Section
               id="limitations"
-              eyebrow="07 — Limitations"
+              eyebrow={`${num(after + 1)} — Limitations`}
               title="What this case study does not claim"
               description="Stating the boundary of a result is part of the result."
             >
@@ -207,15 +212,16 @@ export default function ProjectDetail() {
               ) : null}
             </Section>
 
-            <Section
-              id="evidence"
-              eyebrow="08 — Evidence"
-              title="Visual evidence"
-              description="Approved screenshots and figures."
-            >
-              <EvidenceGrid evidence={caseStudy.evidence} />
-
-            </Section>
+            {caseStudy.evidence.some((item) => item.status === 'approved') ? (
+              <Section
+                id="evidence"
+                eyebrow={`${num(after + 2)} — Evidence`}
+                title="Visual evidence"
+                description="Screenshots and figures."
+              >
+                <EvidenceGrid evidence={caseStudy.evidence.filter((item) => item.status === 'approved')} />
+              </Section>
+            ) : null}
           </>
         ) : (
           <Section

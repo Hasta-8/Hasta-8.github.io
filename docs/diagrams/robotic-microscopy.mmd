@@ -1,0 +1,16 @@
+flowchart TB
+    subgraph Find [Find the tissue]
+      direction LR
+      L[Autofocus shots<br/>under two LEDs] --> M[Merge sharpest<br/>glare-free parts]
+      M --> F[Fisheye<br/>correction]
+      F --> A[ArUco markers<br/>find and flatten<br/>the slide]
+      A --> T[Tissue detection<br/>stain channel, Otsu,<br/>RANSAC outline]
+    end
+    subgraph Move [Send the microscope]
+      direction LR
+      B[Box plus<br/>safety margin]:::check --> H[Homography<br/>pixels to stage mm]
+      H --> G[G-code moves,<br/>scan rows, columns<br/>and focus depth]
+      G --> S[Microscope scans<br/>only the tissue]
+    end
+    Find --> Move
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16

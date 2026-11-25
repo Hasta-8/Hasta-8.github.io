@@ -20,20 +20,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <ProjectVisual project={project} />
 
         <div className="flex flex-1 flex-col p-6">
-          <div className="flex items-center justify-between gap-3">
-            <p className="font-mono text-xs tracking-[0.18em] text-ink-muted uppercase">
-              {project.category === 'professional' ? 'Professional work' : 'Personal project'}
-            </p>
-            {project.status === 'draft' ? (
-              <span className="rounded-full border border-dashed border-line-strong px-2.5 py-0.5 font-mono text-[0.65rem] tracking-[0.14em] text-ink-muted uppercase">
-                Case study draft
-              </span>
-            ) : (
-              <span className="rounded-full bg-accent-soft px-2.5 py-0.5 font-mono text-[0.65rem] tracking-[0.14em] text-accent-strong uppercase">
-                Reviewed
-              </span>
-            )}
-          </div>
+          <p className="font-mono text-xs tracking-[0.18em] text-ink-muted uppercase">
+            {project.category === 'professional' ? 'Professional work' : 'Personal project'}
+          </p>
 
           <h3 className="mt-4 text-xl transition-colors group-hover:text-accent-strong">
             {project.title}

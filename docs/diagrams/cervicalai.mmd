@@ -1,0 +1,10 @@
+flowchart LR
+    S[Pap smear<br/>microscope image] --> T[Tiling and<br/>normalisation]
+    T --> D[Cell detection<br/>RF-DETR]
+    D --> C[One crop<br/>per cell]
+    C --> K[Classifier<br/>NILM, LSIL,<br/>HSIL, SCC]
+    C --> G[Segmentation<br/>cell and nucleus<br/>outlines]
+    G --> N[N/C ratio<br/>nucleus area ÷<br/>cytoplasm area]
+    K --> R[Cells ranked<br/>for pathologist<br/>review]:::check
+    N --> R
+    classDef check fill:#fff7e6,stroke:#c27c0e,color:#0b0f16
