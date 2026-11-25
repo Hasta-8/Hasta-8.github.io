@@ -119,8 +119,7 @@ export const projects: Project[] = [
     ],
     links: [
       { label: 'GitHub repository', href: 'https://github.com/Hasta-8/Image_Similarity_Search' },
-      // Placeholder until the walkthrough is on YouTube: replace href and drop `pending`.
-      { label: 'Walkthrough video', href: 'https://youtu.be/VIDEO_PENDING', pending: true },
+      { label: 'Walkthrough video (2 min)', href: 'https://youtu.be/lahenfW94s4' },
     ],
     caseStudy: caseStudies.imgsimisearch,
   },
