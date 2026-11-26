@@ -32,7 +32,7 @@ export const projects: Project[] = [
     ],
     links: [
       { label: 'GitHub repository', href: 'https://github.com/Hasta-8/production-rag' },
-      { label: 'Walkthrough video (3 min)', href: 'https://youtu.be/VBb8cBV-7U4' },
+      { label: 'Walkthrough video (4 min)', href: 'https://youtu.be/EQdFXa5EfL4' },
     ],
     caseStudy: caseStudies['production-rag'],
   },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     links: [
       { label: 'GitHub repository', href: 'https://github.com/Hasta-8/ShelfScan' },
       { label: 'Live demo', href: 'https://hasta-8.github.io/ShelfScan/' },
-      { label: 'Walkthrough video (90 s)', href: 'https://youtu.be/tzosflpDz_M' },
+      { label: 'Walkthrough video (2 min)', href: 'https://youtu.be/p2lKjtaSrEc' },
       { label: 'Failure gallery', href: 'https://github.com/Hasta-8/ShelfScan/blob/main/docs/failures.md' },
     ],
     caseStudy: caseStudies.shelfscan,
@@ -143,7 +143,7 @@ export const projects: Project[] = [
     links: [
       { label: 'GitHub repository', href: 'https://github.com/Hasta-8/Garment_Detection_Project' },
       { label: 'Live demo', href: 'https://hasta-8.github.io/Garment_Detection_Project/' },
-      { label: 'Walkthrough video (65 s)', href: 'https://github.com/Hasta-8/Garment_Detection_Project/releases/tag/v0.2.0' },
+      { label: 'Walkthrough video (2 min)', href: 'https://youtu.be/dFRQeSfDtRI' },
     ],
     caseStudy: caseStudies.garment,
   },
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     links: [
       { label: 'GitHub repository', href: 'https://github.com/Hasta-8/glove-detection-yolov8' },
       { label: 'Live demo', href: 'https://hasta-8.github.io/glove-detection-yolov8/' },
-      { label: 'Walkthrough video (62 s)', href: 'https://github.com/Hasta-8/glove-detection-yolov8/releases/tag/v0.2.0' },
+      { label: 'Walkthrough video (90 s)', href: 'https://youtu.be/nOzdFzO_gJ4' },
       { label: 'Trained model (release)', href: 'https://github.com/Hasta-8/glove-detection-yolov8/releases/tag/model-v1' },
     ],
     caseStudy: caseStudies.glove,
